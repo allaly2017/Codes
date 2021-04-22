@@ -1,0 +1,120 @@
+---
+title: "Mes réponses aux questions du TP8"
+author: "Konan ALLALY"
+date: "3/25/2021"
+output: html_document
+---
+
+```{r, eval=TRUE}
+setwd("~/Downloads/Prog_Stat/Fichiers-20210210")
+```
+
+## Exercice 1
+### Question 1
+Créer trois vecteurs de même taille
+```{r, eval=TRUE}
+taille = 10
+sexe = factor(vector("character", taille), levels = c("F","M"))
+age = vector("numeric", taille)
+poids = vector("numeric", taille)
+#save(sexe,age, poids, list=character(sexe,age,poids), file = "~/Downloads/Prog_Stat/Fichiers-20210210/backup.RData", ascii = TRUE, version = NULL)
+```
+
+### Question 2
+Sauvegarder les objets sexe, age et poids dans backup.RData 
+```{r, eval=TRUE}
+save(sexe,age,poids, file = "~/Downloads/Prog_Stat/Fichiers-20210210/backup.RData")
+#save(sexe,file = "~/Downloads/Prog_Stat/Fichiers-20210210/backup.RData")
+#save(age,file = "~/Downloads/Prog_Stat/Fichiers-20210210/backup.RData")
+#save(poids,file = "~/Downloads/Prog_Stat/Fichiers-20210210/backup.RData")
+```
+
+### Question 3
+On efface les variables sexe, age et poids de l'environnement de travail
+```{r, eval=TRUE}
+rm(sexe,age,poids)
+```
+
+### Question 4
+```{r, eval=TRUE}
+load("~/Downloads/Prog_Stat/Fichiers-20210210/backup.RData")
+```
+
+
+## Exercice 2
+### Question 1 
+```{r, eval=TRUE}
+#write.table(mydataset, file = "~/Downloads/Prog_Stat/Fichiers-20210210/join.csv")
+```
+
+### Question 2
+```{r, eval=TRUE}
+matrice = matrix(c(1,2,3,4,5,6), nrow=3, ncol=2)
+matrice
+```
+
+### Question 3
+```{r, eval=TRUE}
+nomligne = c("première", "deuxième", "troisième")
+dimnames(matrice) = list(nomligne)
+write.table(matrice, file="~/Downloads/Prog_Stat/Fichiers-20210210/matrice.csv", quote = TRUE, sep = " ")
+```
+
+### Question 4
+```{r, eval=TRUE}
+read.table(file = "matrice.csv", header = TRUE)
+```
+
+## Exercice 3
+### Question 1 : Installer et charger le package xls
+```{r, eval=TRUE}
+#install.packages("xlsx")
+library(xlsx)
+```
+
+### Question 2 : 
+Consultation des fonctions du package xls 
+
+
+### Question 3
+Chargez les jeux de données mtcars, airquality, USArrests et Titanic.
+```{r, eval=TRUE}
+data("mtcars")
+data("airquality")
+data("USArrests")
+data("Titanic")
+```
+
+### Question 4
+Ecrire la table mtcars dans une feuille “MTCARS” d’un classeur nommé “monclasseur.xlsx”.
+```{r, eval=TRUE}
+write.xlsx(mtcars, "~/Downloads/Prog_Stat/Fichiers-20210210/monclasseur.xlsx", sheetName="MTCARS", col.names = TRUE, row.names = TRUE, append = FALSE, password = NULL)
+```
+
+
+### Question 5
+Ajoutez les jeux de données suivants dans trois autres feuilles “TITANIC”, “AIRQUALITY” et “USARRESTS” de ce même classeur.
+```{r, eval=TRUE}
+write.xlsx(Titanic, "~/Downloads/Prog_Stat/Fichiers-20210210/monclasseur.xlsx", sheetName="TITANIC", col.names = TRUE, row.names = TRUE, append = TRUE, password = NULL)
+
+write.xlsx(airquality, "~/Downloads/Prog_Stat/Fichiers-20210210/monclasseur.xlsx", sheetName="AIRQUALITY", col.names = TRUE, row.names = TRUE, append = TRUE, password = NULL)
+
+write.xlsx(USArrests, "~/Downloads/Prog_Stat/Fichiers-20210210/monclasseur.xlsx", sheetName="USARRESTS", col.names = TRUE, row.names = TRUE, append = TRUE, password = NULL)
+```
+
+### Question 6
+Ouvrir le classeur avec Excel pour vérification.
+
+### Question 7
+Ecrire une fonction writeListOfDataSets() qui prend en paramètres le nom du fichier Excel de votre choix, et une liste ... de jeux de données (data.frames). Votre fonction writeListOfDataSets() vous permettra en une seule commande d’exporter plusieurs jeux de données dans plusieurs feuilles d’un classeur. Les noms des jeux de données serviront à nommer les différentes feuilles, de manière automatique. Consultez la documentation du TD3 pour le passage du paramètre “...” à une sous-fonction.
+```{r, eval=TRUE}
+#wrtiteListOfDataSets = function(fichier_excel, ...){
+#  donnees =  autre_function(...){
+#    return(donnees)
+#  }
+#  
+#  return(cpt)
+#}
+#writeListOfDataSets(monclasseur.xlsx,mtcars,Titanic,airquality,USArrests)
+```
+
