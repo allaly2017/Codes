@@ -1,0 +1,115 @@
+---
+title: "Mes réponses aux questions du TP7"
+author: "Konan ALLALY"
+date: "3/5/2021"
+output: 
+html_document:
+  toc:true
+  toc_float:true
+---
+
+```{r, eval=TRUE}
+setwd("~/Downloads/Prog_Stat/Fichiers-20210210")
+```
+
+## Exercice 1
+### Question 1
+```{r, eval=TRUE}
+Xqual = factor(c(rep("0-10", 1), rep("11-20", 3), rep("21-30", 5), rep("31-40", 20), 
+ rep("41-50", 2), rep("51-60", 2), rep("61-70", 1), rep("71-80", 31), rep("+ de 80", 
+  20)))
+frequence = (table(Xqual)/length(Xqual))*100
+```
+
+### Question 2
+```{r, eval=TRUE}
+modalite = levels(Xqual)
+modalite[which(frequence<5)]
+```
+
+### Question 3
+```{r, eval=TRUE}
+table(Xqual)
+paste(levels(Xqual)[1],levels(Xqual)[2], sep=".") 
+XqualModif = as.character(Xqual) # On transforme en caractère avant la fusion 
+XqualModif[XqualModif == levels(Xqual)[1]] <- paste(levels(Xqual)[1],levels(Xqual)[2], sep=".")
+XqualModif[XqualModif == levels(Xqual)[2]] <- paste(levels(Xqual)[1],levels(Xqual)[2], sep=".")
+XqualModif = as.factor(XqualModif)
+(table(XqualModif)/length(XqualModif))*100
+
+#for(i in 1:(length(Xqual)-1)){
+#  frequence = (table(Xqual)/length(Xqual))*100
+#  if (frequence[i] < 5){
+#    Xqual = as.character(Xqual)
+#    Xqual[Xqual== levels(Xqual)[i]] <- paste(levels(Xqual)[i], levels(Xqual)[i+1], sep = ".")
+#    Xqual[Xqual== levels(Xqual)[i+1]] <- paste(levels(Xqual)[i], levels(Xqual)[i+1], sep = ".")
+#    Xqual = as.factor(Xqual)
+#  }
+#}
+#(table(Xqual)/length(Xqual))*100
+```
+
+### Question 4
+```{r, eval=TRUE}
+ventilation = function(facteur, seuil){
+  frequence = (table(facteur)/length(facteur))*100
+  modalite = levels(facteur)
+  tab = modalite[which(frequence < seuil)]
+  facteur2 = facteur
+  for(i in 1:length(tab)){
+    facteur2 = facteur2[-which(facteur2==tab[i])]
+  }
+  facteur2 = as.factor(as.character(facteur2))
+  proba = (table(facteur2)/length(facteur2))*100
+  for(i in 1:length(tab)){
+    for(j in 1:length(facteur)){
+      if(tab[i]==facteur[j]){
+        facteur[j] = sample(levels(facteur2), size = 1, replace=TRUE, prob = proba)
+      }
+    }
+  }
+  return(((table(as.factor(as.character(facteur)))/length(facteur)))*100)
+}
+ventilation(Xqual,5)
+(table(Xqual)/length(Xqual))*100
+```
+
+### Question 5
+```{r, eval=TRUE}
+# Ventiller toutes les variables
+#Xqual
+#ordered(Xqual)
+#laine = factor(c(rep("faible",5), rep("fort",5)))
+#tension = factor(c(rep("Ang",3), rep("Ner",3), rep("Tex",4)))
+#table(laine)
+table(factor(c(rep("Faible",5), rep("Fort",5))),factor(c(rep("Ner",3), rep("Ang",3), rep("Tex",4))))
+tabmat = as.character(table(factor(c(rep("Faible",5), rep("Fort",5))),factor(c(rep("Ner",3), rep("Ang",3), rep("Tex",4)))))
+tabmat = as.matrix(tabmat)
+tabmat
+```
+
+
+## Exercice 2
+### Question 1
+```{r, eval=TRUE}
+
+```
+
+
+### Question 2
+```{r, eval=TRUE}
+```
+
+### Question 3
+```{r, eval=TRUE}
+```
+
+### Question 4
+```{r, eval=TRUE}
+```
+
+### Question 5
+```{r, eval=TRUE}
+```
+
+
